@@ -51,24 +51,21 @@
             context.fillStyle = randomColor();
             context.fillRect(prevTouches[0], 0, thisTouches[0] - prevTouches[0], prevTouches[1])
             context.fillStyle = randomColor();
-			context.fillRect(0, prevTouches[1], prevTouches[0], thisTouches[1] - prevTouches[1])
-			context.fillStyle = randomColor();
-			context.fillRect(thisTouches[0], prevTouches[1], innerWidth, thisTouches[1] - prevTouches[1])
-			context.fillStyle = randomColor();
-			context.fillRect(prevTouches[0], 0, thisTouches[0] - prevTouches[0], prevTouches[1])
-			context.fillStyle = randomColor();
-			context.fillRect(prevTouches[0], thisTouches[1], thisTouches[0] - prevTouches[0], 1000)
-			isMouseDown = false
-			prevTouches = []
+            context.fillRect(0, prevTouches[1], prevTouches[0], thisTouches[1] - prevTouches[1])
+	    context.fillStyle = randomColor();
+	    context.fillRect(thisTouches[0], prevTouches[1], innerWidth, thisTouches[1] - prevTouches[1])
+	    context.fillStyle = randomColor();
+	    context.fillRect(prevTouches[0], 0, thisTouches[0] - prevTouches[0], prevTouches[1])
+	    context.fillStyle = randomColor();
+	    context.fillRect(prevTouches[0], thisTouches[1], thisTouches[0] - prevTouches[0], 1000)
+	    isMouseDown = false
+	    prevTouches = []
         })
         function random(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
         function randomColor() {
-            return `rgb(${random(0,
-                255)}, ${random(0,
-                255)}, ${random(0,
-                255)})`
+            return `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`
         }
     </script>
 </body>
