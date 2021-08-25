@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <style type="text/css" media="all">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        canvas {
+            height: 100vh;
+            width: 100vw;
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <script type="text/javascript" charset="utf-8">
+        const canvas = document.querySelector("canvas");
+        const context = canvas.getContext("2d");
+        function resizeCanvas() {
+            canvas.height = innerHeight;
+            canvas.width = innerWidth;
+        }
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+        let isMouseDown;
+        let prevTouches = [];
+        addEventListener("touchstart", e => {
+            isMouseDown = true;
+            const touch = e.touches[0]
+            prevTouches = [touch.clientX, touch.clientY]
+        })
+        let thisTouches;
+        addEventListener("touchmove", e => {
+            const touch = e.touches[0]
+            thisTouches = [touch.clientX, touch.clientY]
+            context.fillStyle = randomColor();
+            context.clearRect(0, 0, canvas.width, canvas.height)
+            context.fillRect(prevTouches[0], prevTouches[1], thisTouches[0] - prevTouches[0], thisTouches[1] - prevTouches[1])
+        })
+        addEventListener("touchend", e => {
+            context.clearRect(0, 0, canvas.width, canvas.height)
+            context.fillStyle = randomColor();
+            context.fillRect(prevTouches[0], prevTouches[1], thisTouches[0] - prevTouches[0], thisTouches[1] - prevTouches[1])
+            context.fillStyle = randomColor();
+            context.fillRect(prevTouches[0], 0, thisTouches[0] - prevTouches[0], prevTouches[1])
+            context.fillStyle = randomColor();
+			context.fillRect(0, prevTouches[1], prevTouches[0], thisTouches[1] - prevTouches[1])
+			context.fillStyle = randomColor();
+			context.fillRect(thisTouches[0], prevTouches[1], innerWidth, thisTouches[1] - prevTouches[1])
+			context.fillStyle = randomColor();
+			context.fillRect(prevTouches[0], 0, thisTouches[0] - prevTouches[0], prevTouches[1])
+			context.fillStyle = randomColor();
+			context.fillRect(prevTouches[0], thisTouches[1], thisTouches[0] - prevTouches[0], 1000)
+			isMouseDown = false
+			prevTouches = []
+        })
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        function randomColor() {
+            return `rgb(${random(0,
+                255)}, ${random(0,
+                255)}, ${random(0,
+                255)})`
+        }
+    </script>
+</body>
+</html>
